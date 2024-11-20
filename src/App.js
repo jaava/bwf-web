@@ -1,7 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
 
 function App() {
+
+  useEffect(() => {
+    const getData = async () => {
+      await fetch('http://127.0.0.1:8888/api/groups/')
+      .then(response => response.json())
+      .then(data => console.log(data))
+    }
+    getData();
+  },[])
+
   return (
     <div className="App">
       <header className="App-header">
