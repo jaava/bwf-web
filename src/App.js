@@ -1,33 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [groups, setGroups ] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true)
     const getData = async () => {
       await fetch('http://127.0.0.1:8888/api/groups/')
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        setGroups(data)
+        setLoading(false)})
+      .catch(error => {
+        setError(true)
+        setLoading(false)
+      })
     }
     getData();
   },[])
 
+  if(error) {
+    return <h1>Error</h1>
+  }
+
+  if(loading) {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      
+        {groups && groups.map(group => {
+          return <p key={group.id}>{group.name}: {group.location}</p>
+        })}
+        
       </header>
     </div>
   );
