@@ -7,14 +7,14 @@ function App() {
  
   return (
     <div className="App">
-      <header className="App-header">
+      
         <Header />
-        <div>
+        <div className="general-content"> 
           <Sidebar />
           <Main />
           
         </div>
-      </header>
+      
     </div>
   );
 }
