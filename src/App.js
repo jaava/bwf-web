@@ -2,10 +2,13 @@ import './App.css';
 import Header from './components/header';
 import Main from './components/main';
 import Sidebar from './components/sidebar';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
 function App() {
  
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       
         <Header />
@@ -16,6 +19,7 @@ function App() {
         </div>
       
     </div>
+    </ThemeProvider>
   );
 }
 
