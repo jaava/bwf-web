@@ -2,6 +2,7 @@
 
 Node.js v18.20.2
 
+yarn add react-router-dom@5.3.4 installs a specific version
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
