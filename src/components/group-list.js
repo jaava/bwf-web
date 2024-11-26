@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function GroupList() {
     const [groups, setGroups] = useState(null);
@@ -33,7 +34,11 @@ function GroupList() {
     return (
         <div>
             {groups && groups.map(group => {
-                return <p key={group.id}>{group.name}: {group.location}</p>
+                return (
+                    <Link key={group.id} to={`/details/${group.id}`}>
+                        <p>{group.name}: {group.location}</p>
+                    </Link>
+                )
             })}
 
         </div>
