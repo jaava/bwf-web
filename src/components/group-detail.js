@@ -1,28 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getGroup } from '../services/group-serviecs';
+import useFetchGroup from '../hooks/fetch-group';
 
 function GroupDetail() {
     
     const { id } = useParams();
-
-    const [groups, setGroups] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [data, loading, error] = useFetchGroup(id);
+    const [group, setGroup] = useState(null);
 
     useEffect(() => {
-        setLoading(true)
-        const getData = async () => {
-            await getGroup(id)
-                .then(data => {
-                    setGroups(data)
-                    setLoading(false)
-                })
-
-        }
-        getData();
-    }, [])
+        setGroup(data);
+    }, [data])
 
     if (error) {
         return <h1>Error</h1>
@@ -35,7 +24,8 @@ function GroupDetail() {
     return (
         <div>
             <Link to={'/'}>Back</Link>
-            <h1>Group Detail {id}</h1>
+            {group && <h1>Group Detail {group.id}{group.name}: {group.location}</h1>}
+            
         </div>
     );
 }
