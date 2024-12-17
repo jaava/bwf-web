@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import useFetchGroup from '../hooks/fetch-group';
 import { DateTime } from 'luxon';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import AlarmIcon from '@material-ui/icons/Alarm';
 
 function GroupDetail() {
     
@@ -34,8 +36,7 @@ function GroupDetail() {
                     const evtTime = DateTime.fromFormat(event.time, format);
                     return <div key={event.id}>
                         <p>{event.team1} VS {event.team2}</p>
-                        <p>{event.time}</p>
-                        <p>{evtTime.toSQLDate()} {evtTime.toFormat('HH:mm')}</p>
+                        <p><CalendarTodayIcon/>{evtTime.toSQLDate()} <AlarmIcon/>{evtTime.toFormat('HH:mm')}</p>
                         </div>
                 })}
             </Fragment>}
