@@ -12,6 +12,11 @@ const theme = createTheme({
             main: lightBlue[800],
         },
     },
+    colors:{
+        bgColor: '#3e3e3e',
+        bgLightColor: '#888',
+        mainAccentColor: '#fecc01',
+    }
 });
 
 export default theme;
