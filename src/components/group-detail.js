@@ -31,6 +31,7 @@ function GroupDetail() {
                 { group.events.map(event=> {
                     return <div key={event.id}>
                         <p>{event.team1} VS {event.team2}</p>
+                        <p>{event.time}</p>
                         </div>
                 })}
             </Fragment>}
