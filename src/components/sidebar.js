@@ -1,13 +1,47 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
+import { useState } from "react";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import VpnKey  from "@material-ui/icons/VpnKey";
 function Sidebar() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = (e) => {   
+        e.preventDefault();
+        console.log("Username: ", username);
+        console.log("Password: ", password);
+    }
+
     return (
         <div className="sidebar">
-            <h1>Sidebar</h1>
-            <Button color="secondary" variant="contained">
+            <form onSubmit={handleSubmit}>
+            <Grid container spacing={1} alignItems="flex-end">
+                <Grid item>
+                    <AccountCircle />
+                </Grid>
+                <Grid item>
+                    <TextField id="input-with-icon-grid" label="Username" 
+                    onChange={(e) => setUsername(e.target.value)}
+                    />
+                </Grid>
+            </Grid>
+            <Grid container spacing={1} alignItems="flex-end">
+                <Grid item>
+                    <VpnKey />
+                </Grid>
+                <Grid item>
+                    <TextField id="input-with-icon-grid" label="Password" type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                </Grid>
+            </Grid>
+            <Button color="primary" variant="contained" type="submit">
                 My Button
             </Button>
-            
+            </form>
         </div>
     );
 }
