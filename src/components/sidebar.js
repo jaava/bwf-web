@@ -6,20 +6,23 @@ import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey  from "@material-ui/icons/VpnKey";
 import { auth } from "../services/user-servces"; 
+import { useAuth } from "../hooks/useAuth";
 
 
 function Sidebar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const {authData, setAuthData} = useAuth();
 
     const handleSubmit = async (e) => {   
         e.preventDefault();
-        const authData = await auth({username, password});
-        console.log(authData);
+        const data = await auth({username, password});
+        setAuthData(data);
     }
 
     return (
         <div className="sidebar">
+            {authData && <p>{authData}</p>}
             <form onSubmit={handleSubmit}>
             <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>

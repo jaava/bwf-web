@@ -1,29 +1,28 @@
-import './App.css';
-import Header from './components/header';
-import Main from './components/main';
-import Sidebar from './components/sidebar';
-import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './theme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import "./App.css";
+import Header from "./components/header";
+import Main from "./components/main";
+import Sidebar from "./components/sidebar";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./theme";
+import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth";
 
 function App() {
- 
+  const user = "MyUser"
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-        
-        <Header />
-        <div className="general-content"> 
-          <Sidebar />
-          <Router>
-          <Main />
-          </Router>
-        </div>
-        
-      
+      <AuthProvider user={user}>
+      <div className="App">
+        <Router>
+          <Header />
+          <div className="general-content">
+            <Sidebar />
 
-      
-    </div>
+            <Main />
+          </div>
+        </Router>
+      </div>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
