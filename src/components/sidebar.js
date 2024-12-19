@@ -5,14 +5,17 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey  from "@material-ui/icons/VpnKey";
+import { auth } from "../services/user-servces"; 
+
+
 function Sidebar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = async (e) => {   
         e.preventDefault();
-        console.log("Username: ", username);
-        console.log("Password: ", password);
+        const authData = await auth({username, password});
+        console.log(authData);
     }
 
     return (
