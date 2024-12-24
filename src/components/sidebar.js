@@ -12,17 +12,17 @@ import { useAuth } from "../hooks/useAuth";
 function Sidebar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const {authData, setAuthData} = useAuth();
+    const {authData, setAuth} = useAuth();
 
     const handleSubmit = async (e) => {   
         e.preventDefault();
         const data = await auth({username, password});
-        setAuthData(data);
+        setAuth(data);
     }
 
     return (
         <div className="sidebar">
-            {authData && <p>{authData}</p>}
+            {authData && <p>{authData.token}</p>}
             <form onSubmit={handleSubmit}>
             <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>

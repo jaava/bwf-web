@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 
 function App() {
-  const user = "MyUser"
+  const user = JSON.parse(localStorage.getItem("bwf-user"));
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider user={user}>
