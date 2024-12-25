@@ -7,6 +7,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey  from "@material-ui/icons/VpnKey";
 import { auth } from "../services/user-servces"; 
 import { useAuth } from "../hooks/useAuth";
+import { LocalDiningOutlined } from "@material-ui/icons";
 
 
 function Sidebar() {
@@ -20,9 +21,13 @@ function Sidebar() {
         setAuth(data);
     }
 
+    const logout = () => {
+        setAuth(null);
+    }
+
     return (
         <div className="sidebar">
-            {authData && <p>{authData.token}</p>}
+            {!authData ?
             <form onSubmit={handleSubmit}>
             <Grid container spacing={1} alignItems="flex-end">
                 <Grid item>
@@ -45,9 +50,17 @@ function Sidebar() {
                 </Grid>
             </Grid>
             <Button color="primary" variant="contained" type="submit">
-                My Button
+                login
             </Button>
             </form>
+            : <div>
+                <p>{authData.user.username}</p>
+                <Button color="primary" variant="contained" onClick={() => logout()}>
+                    Logout
+                </Button>
+            </div>
+            
+            }
         </div>
     );
 }
