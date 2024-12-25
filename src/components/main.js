@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import GroupList from "./group-list";
 import GroupDetail from "./group-detail";
+import Register from "./register";
 import { useAuth } from "../hooks/useAuth";
 
 function Main() {
@@ -14,6 +15,9 @@ function Main() {
             <Switch>
                 <Route exact path="/" component={GroupList} />
                 <Route path="/details/:id" component={GroupDetail} />
+                <Route path="/register">
+                    <Register />
+                </Route>
 
 
             </Switch>
