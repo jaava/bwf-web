@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
 import Email from "@material-ui/icons/Email";
-import { register } from "../services/user-servces";
+import { register } from "../../services/user-servces";
+import { auth } from "../../services/user-servces";
 
 function Register() {
-    const { authData } = useAuth();
+    const { authData, setAuth } = useAuth();
+    const history = useHistory();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
@@ -26,7 +28,9 @@ function Register() {
             const regData = await register({ username, password, email, profile: { is_premium: false} });
 
             if (regData) {
-                console.log("Registration successful", regData);
+                const data = await auth({ username, password });
+                setAuth(data);
+                history.push('/account');
             }
             
         } else {

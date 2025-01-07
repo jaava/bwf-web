@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
-import useFetchGroup from '../hooks/fetch-group';
+import useFetchGroup from '../../hooks/fetch-group';
 import { DateTime } from 'luxon';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import { makeStyles } from '@material-ui/core/styles';
-import theme from '../theme';
+import theme from '../../theme';
 
 const useStyles = makeStyles(theme => ({
     dateTime: {

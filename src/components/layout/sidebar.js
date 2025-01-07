@@ -5,8 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
-import { auth } from "../services/user-servces";
-import { useAuth } from "../hooks/useAuth";
+import { auth } from "../../services/user-servces";
+import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
