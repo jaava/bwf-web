@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
+import Email from "@material-ui/icons/Email";
+import { register } from "../services/user-servces";
 
 function Register() {
     const { authData } = useAuth();
@@ -21,7 +23,12 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (passMatch()) {
-            console.log("Passwords match", username, password, email);
+            const regData = await register({ username, password, email, profile: { is_premium: false} });
+
+            if (regData) {
+                console.log("Registration successful", regData);
+            }
+            
         } else {
             console.log("Passwords don't match");
         }
@@ -63,7 +70,7 @@ function Register() {
                 </Grid>
                 <Grid container spacing={1} alignItems="flex-end">
                     <Grid item>
-                        <AccountCircle />
+                        <Email />
                     </Grid>
                     <Grid item>
                         <TextField id="input-with-icon-grid" label="Email"
