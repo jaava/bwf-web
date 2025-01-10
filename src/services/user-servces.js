@@ -25,3 +25,14 @@ export function register(userData){
         console.log(error);
     });
 }
+
+export function uploadAvatar(profileId, data){
+    return fetch(`http://127.0.0.1:8888/api/profile/${profileId}/`, {
+        method: "PUT",
+        body: data
+    })
+    .then((res) => res.json())
+    .catch((error) => {
+        console.log(error);
+    });
+}

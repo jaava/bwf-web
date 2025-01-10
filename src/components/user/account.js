@@ -7,10 +7,11 @@ import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
 import Email from "@material-ui/icons/Email";
-import { register } from "../../services/user-servces";
+import { uploadAvatar } from "../../services/user-servces";
 
 function Account() {
     const { authData } = useAuth();
+    const [image, setImage] = useState(null);
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
     // const [password2, setPassword2] = useState("");
@@ -20,15 +21,24 @@ function Account() {
     //     return password === password2;
     // }
 
-    const handleSubmit = async (e) => {
+    const uploadFile = async (e) => {
         e.preventDefault();
+        const uploadData = new FormData();
+        uploadData.append('image', image, image.name);
 
+        const profileData = await uploadAvatar(authData.user.profile.id, uploadData);
     }
     return (
         <div>
             <Link to={'/'}>Back</Link>
             <h1>Account</h1>
-            
+            <form onSubmit={uploadFile}>
+                <label>
+                    <p>Upload your avatar</p>
+                    <TextField type="file" onChange={ e => setImage(e.target.files[0])} />
+                </label>
+                <Button type="submit" variant="contained" color="primary">Upload file</Button>
+            </form>
         </div>
     );
 }
