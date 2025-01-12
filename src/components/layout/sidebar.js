@@ -8,6 +8,7 @@ import VpnKey from "@material-ui/icons/VpnKey";
 import { auth } from "../../services/user-servces";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import User from "../user/user";
 
 function Sidebar() {
     const [username, setUsername] = useState("");
@@ -56,8 +57,7 @@ function Sidebar() {
                     <Link to={'/register'}>Register here if you don't have an account yet.</Link>
                 </div>
                 : <div>
-                    <p>{authData.user.username}</p>
-                    <img src={"http://127.0.0.1:8888"+authData.user.profile.image} alt="user avatar" height={100} />
+                    <User user={authData.user}/>
                     <Button color="primary" variant="contained" onClick={() => logout()}>
                         Logout
                     </Button>
