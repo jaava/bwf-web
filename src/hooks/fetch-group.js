@@ -13,7 +13,7 @@ function useFetchGroup(groupId) {
             const data = await getGroup(groupId);
             setGroup(data);
             setLoading(false);
-
+            setError(null);
         }
         getData();
 

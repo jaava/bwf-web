@@ -1,6 +1,7 @@
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
     container:{
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
     }
 });
 
-function User({user}) {
+export default function User({user}) {
 
     const classes = useStyles();
 
@@ -29,4 +30,11 @@ function User({user}) {
     );
 }
 
-export default User;
+User.propTypes = {
+    user: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        profile: PropTypes.shape({
+            image: PropTypes.string.isRequired
+        }).isRequired
+    }).isRequired
+}
