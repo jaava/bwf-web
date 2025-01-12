@@ -57,6 +57,7 @@ function Sidebar() {
                 </div>
                 : <div>
                     <p>{authData.user.username}</p>
+                    <img src={"http://127.0.0.1:8888"+authData.user.profile.image} alt="user avatar" height={100} />
                     <Button color="primary" variant="contained" onClick={() => logout()}>
                         Logout
                     </Button>
