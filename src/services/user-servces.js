@@ -1,3 +1,5 @@
+import { status } from "../utils";
+
 export function auth(credentials){
     return fetch("http://127.0.0.1:8888/api/authenticate/", {
         method: "POST",
@@ -6,9 +8,9 @@ export function auth(credentials){
         },
         body: JSON.stringify(credentials)
     })
-    .then((res) => res.json())
+    .then(status)
     .catch((error) => {
-        console.log("Error: ", error);
+        console.error(error);
     });
 }
 
@@ -20,9 +22,9 @@ export function register(userData){
         },
         body: JSON.stringify(userData)
     })
-    .then((res) => res.json())
+    .then(status)
     .catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
@@ -31,9 +33,9 @@ export function uploadAvatar(profileId, data){
         method: "PUT",
         body: data
     })
-    .then((res) => res.json())
+    .then(status)
     .catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
@@ -45,8 +47,8 @@ export function changePass(userData, userId){
         },
         body: JSON.stringify(userData)
     })
-    .then((res) => res.json())
+    .then(status)
     .catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
