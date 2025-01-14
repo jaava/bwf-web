@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState} from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -7,13 +7,14 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
 import { auth } from "../../services/user-servces";
 import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import User from "../user/user";
 
 function Sidebar() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const { authData, setAuth } = useAuth();
+    const history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,6 +24,10 @@ function Sidebar() {
 
     const logout = () => {
         setAuth(null);
+    }
+
+    const account = () => {
+        history.push('/account');
     }
 
     return (
@@ -58,8 +63,13 @@ function Sidebar() {
                 </div>
                 : <div>
                     <User user={authData.user}/>
+                    <br />
+                    <br />
                     <Button color="primary" variant="contained" onClick={() => logout()}>
                         Logout
+                    </Button>
+                    <Button color="primary" variant="contained" onClick={() => account()}>
+                        My Account
                     </Button>
                 </div>
 
