@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import VpnKey from "@material-ui/icons/VpnKey";
 import { uploadAvatar } from "../../services/user-servces";
 import { changePass } from "../../services/user-servces";
+import { NotificationManager } from "react-notifications";
 
 function Account() {
     const { authData } = useAuth();
@@ -25,16 +26,24 @@ function Account() {
         const uploadData = new FormData();
         uploadData.append('image', image, image.name);
 
-        await uploadAvatar(authData.user.profile.id, uploadData);
+        const uploaded = await uploadAvatar(authData.user.profile.id, uploadData);
+    
+        if(uploaded){
+            NotificationManager.success("Avatar uploaded successfully");
+        }else{
+            NotificationManager.error("Error. Avatar not uploaded");
+        }
     }
 
     const submitChangePass = async (e) => {
         e.preventDefault();
         if (passMatch()) {
-            const regData = await changePass({ old_password: oldPassword, new_password: password }, authData.user.id);
-            
+            const passData = await changePass({ old_password: oldPassword, new_password: password }, authData.user.id);
+            if(passData){
+                NotificationManager.success("Password changed successfully");
+            }
         } else {
-            console.log("Passwords don't match");
+            NotificationManager.error("Passwords don't match");
         }
     }
     return (
