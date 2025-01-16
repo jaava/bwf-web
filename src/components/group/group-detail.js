@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import { makeStyles } from '@material-ui/core/styles';
-import theme from '../../theme';
+import  User from '../user/user';
 
 const useStyles = makeStyles(theme => ({
     dateTime: {
@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
         marginRight: '3px',
         marginTop: '10px',
         color: theme.colors.mainAccentColor
+    },
+    memberContainer:{
+        display: 'flex',
+        gridTemplateColumns: '100px auto',
     }
 }));
 
@@ -52,6 +56,15 @@ function GroupDetail() {
                         <p>
                             <CalendarTodayIcon className={classes.dateTime}/>{evtTime.toSQLDate()} 
                             <AlarmIcon className={classes.dateTime}/>{evtTime.toFormat('HH:mm')}</p>
+                        </div>
+                })}
+                <br/>
+                <h3>Members:</h3>
+                { group.members.map(member=> {
+                    
+                    return <div key={member.id} className={classes.memberContainer}>
+                        <User user={member.user} />
+                        <p>{member.points}pts</p>
                         </div>
                 })}
             </Fragment>}
