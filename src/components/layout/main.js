@@ -12,7 +12,6 @@ function Main() {
 
     return (
         <div className="main">
-            {authData && <h3>{authData.user.username}</h3>}
             <Switch>
                 <Route exact path="/" component={GroupList} />
                 <Route path="/details/:id" component={GroupDetail} />
