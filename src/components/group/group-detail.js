@@ -8,7 +8,7 @@ import AlarmIcon from '@material-ui/icons/Alarm';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import  User from '../user/user';
-import { joinGroup } from '../../services/group-serviecs';
+import { joinGroup, leaveGroup } from '../../services/group-serviecs';
 import { useAuth } from '../../hooks/useAuth';
 
 const useStyles = makeStyles(theme => ({
@@ -44,6 +44,13 @@ function GroupDetail() {
         })
     }
 
+    const leaveHere = () => {
+        leaveGroup({user: authData.user.id, group: group.id})
+        .then(res => {
+            console.log(res);
+        })
+    }
+
     if (error) {
         return <h1>Error</h1>
     }
@@ -58,7 +65,14 @@ function GroupDetail() {
             {group && <Fragment>
                 <h1>Group Detail {group.id}{group.name}: {group.location}</h1>
                 <h2>{group.description}</h2>
-                <Button onClick={()=>joinHere()} variant="contained" color="primary">Join Group</Button>
+                
+                <Button onClick={()=>joinHere()} variant="contained" 
+                color="primary">Join Group</Button>
+
+                <Button onClick={()=>leaveHere()} variant="contained" 
+                color="primary">Leave Group</Button>
+
+
                 <h3>Events:</h3>
                 { group.events.map(event=> {
                     const format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
