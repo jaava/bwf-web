@@ -15,3 +15,15 @@ export function getGroups(){
         console.error(error);
     });
 }
+
+export function joinGroup(data){
+    return fetch('http://127.0.0.1:8888/api/members/join/', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(data) 
+    })
+    .then(status)
+    .catch((error) => {
+        console.error(error);
+    });
+}
