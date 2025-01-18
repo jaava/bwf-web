@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import  User from '../user/user';
 import { joinGroup, leaveGroup } from '../../services/group-serviecs';
 import { useAuth } from '../../hooks/useAuth';
+import Comments from '../comments/comments';
 
 const useStyles = makeStyles(theme => ({
     dateTime: {
@@ -103,8 +104,10 @@ function GroupDetail() {
                     return <div key={member.id} className={classes.memberContainer}>
                         <User user={member.user} />
                         <p>{member.points}pts</p>
-                        </div>
+                        </div> 
                 })}
+
+                <Comments group={group}/>
             </Fragment>}
             
         </div>
