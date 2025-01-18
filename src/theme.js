@@ -15,6 +15,7 @@ const theme = createTheme({
     colors:{
         bgColor: '#3e3e3e',
         bgLightColor: '#888',
+        bgLighterColor: '#DADADA',
         mainAccentColor: '#fecc01',
     }
 });
