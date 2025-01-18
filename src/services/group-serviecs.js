@@ -39,3 +39,19 @@ export function leaveGroup(data){
         console.error(error);
     });
 }
+
+
+export function postComment(token, description, group, user){
+    return fetch('http://127.0.0.1:8888/api/comments/', { 
+        method: 'POST', 
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${token}`
+        }, 
+        body: JSON.stringify({description, group, user}) 
+    })
+    .then(status)
+    .catch((error) => {
+        console.error(error);
+    });
+}
