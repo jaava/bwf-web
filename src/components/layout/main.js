@@ -4,6 +4,7 @@ import GroupList from "../group/group-list";
 import GroupDetail from "../group/group-detail";
 import Register from "../user/register";
 import Account from "../user/account";
+import Event from "../events/event";
 import { useAuth } from "../../hooks/useAuth";
 
 function Main() {
@@ -15,6 +16,9 @@ function Main() {
             <Switch>
                 <Route exact path="/" component={GroupList} />
                 <Route path="/details/:id" component={GroupDetail} />
+                <Route path="/events/:id">
+                    <Event />
+                </Route>
                 <Route path="/register">
                     <Register />
                 </Route>
