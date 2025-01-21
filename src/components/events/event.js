@@ -7,8 +7,10 @@ import useFetchEvent from '../../hooks/fetch-event';
 import { useAuth } from '../../hooks/useAuth';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AlarmIcon from '@material-ui/icons/Alarm';
+import TextField from '@material-ui/core/TextField';
 import { DateTime } from 'luxon';
 import User from '../user/user';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     bets:{
@@ -25,6 +27,8 @@ export default function Event() {
     const [data, loading, error] = useFetchEvent(authData.token, id);
     const [event, setEvent] = useState(null);
     const [evtTime, setEvtTime] = useState(null);
+    const [score1, setScore1] = useState(null);
+    const [score2, setScore2] = useState(null);
 
     useEffect(() => {
 
@@ -36,6 +40,9 @@ export default function Event() {
         }
     }, [data])
 
+    const sendBet = async () => {
+        console.log('sendBet', score1, score2);
+    }
 
     if (error) {
         return <h1>Error</h1>
@@ -66,6 +73,11 @@ export default function Event() {
                     </div>
                     })
                 }
+                <hr />
+                <br />
+                <TextField type="number" label="Score 1" onChange={e=>setScore1(e.target.value)}/>
+                <TextField type="number" label="Score 2" onChange={e=>setScore2(e.target.value)}/>
+                <Button variant="contained" color="primary" onClick={() => sendBet()} disabled={!score1 || !score2}>Place Bet</Button>
             </div>
             }
         </Fragment>
