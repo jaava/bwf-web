@@ -8,9 +8,11 @@ import { useAuth } from '../../hooks/useAuth';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
 import { DateTime } from 'luxon';
 import User from '../user/user';
-import { Button } from '@material-ui/core';
+import { placeBet } from '../../services/event-services';
+import { NotificationManager } from "react-notifications";
 
 const useStyles = makeStyles(theme => ({
     bets:{
@@ -41,7 +43,18 @@ export default function Event() {
     }, [data])
 
     const sendBet = async () => {
-        console.log('sendBet', score1, score2);
+        const bet = await placeBet(authData.token, {score1, score2,"event": event.id});
+        if (bet){
+            if(bet.new){
+                event.bets.push(bet.result);
+            }else{
+                const myBetIndex = event.bets.findIndex(el => el.user.id === bet.result.user.id);
+                event.bets[myBetIndex] = bet.result;
+            }
+            NotificationManager.success(bet.message);
+            setScore1('');
+            setScore2('');
+        }
     }
 
     if (error) {
