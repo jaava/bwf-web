@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
 import useFetchGroup from '../../hooks/fetch-group';
-
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import  User from '../user/user';
@@ -34,6 +33,7 @@ function GroupDetail() {
     const [group, setGroup] = useState(null);
     const [isGroup, setInGroup] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -60,6 +60,10 @@ function GroupDetail() {
         })
     }
 
+    const addEvent = () => {
+        history.push('/event-form', {group});
+    }
+
     if (error) {
         return <h1>Error</h1>
     }
@@ -82,6 +86,9 @@ function GroupDetail() {
                 color="primary">Join Group</Button>
                 }
                 
+                {isAdmin &&
+                <Button onClick={()=>addEvent()} variant="contained" 
+                color="primary">Add new Event</Button>}
 
                 <EventList events={group.events} />
 

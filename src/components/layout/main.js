@@ -5,6 +5,7 @@ import GroupDetail from "../group/group-detail";
 import Register from "../user/register";
 import Account from "../user/account";
 import Event from "../events/event";
+import EventForm from "../events/event-form";
 import { useAuth } from "../../hooks/useAuth";
 
 function Main() {
@@ -18,6 +19,9 @@ function Main() {
                 <Route path="/details/:id" component={GroupDetail} />
                 <Route path="/events/:id">
                     <Event />
+                </Route>
+                <Route path="/event-form">
+                    <EventForm />
                 </Route>
                 <Route path="/register">
                     <Register />

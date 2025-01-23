@@ -13,6 +13,7 @@ import { DateTime } from 'luxon';
 import User from '../user/user';
 import { placeBet } from '../../services/event-services';
 import { NotificationManager } from "react-notifications";
+import Link from 'react-router-dom/Link';
 
 const useStyles = makeStyles(theme => ({
     bets:{
@@ -67,7 +68,10 @@ export default function Event() {
 
     return (
         <Fragment>
-            {event && evtTime && <div>
+            
+            {event && evtTime && 
+            <div>
+                <Link to={`/details/${event.group}`}>Back</Link>
                 <h3>{event.team1} VS {event.team2}</h3>
                 {event.score1>=0 && event.score2>=0 &&
                     <h2>{event.score1} : {event.score2}</h2>
