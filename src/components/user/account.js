@@ -8,6 +8,7 @@ import VpnKey from "@material-ui/icons/VpnKey";
 import { uploadAvatar } from "../../services/user-servces";
 import { changePass } from "../../services/user-servces";
 import { NotificationManager } from "react-notifications";
+import { CssTextField} from "../layout/elements";
 
 function Account() {
     const { authData } = useAuth();
@@ -67,7 +68,7 @@ function Account() {
                         <VpnKey />
                     </Grid>
                     <Grid item>
-                        <TextField id="input-with-icon-grid" label="Old Password" type="password"
+                        <CssTextField id="input-with-icon-grid" label="Old Password" type="password"
                             onChange={(e) => setOldPassword(e.target.value)}
                         />
                     </Grid>
@@ -77,7 +78,7 @@ function Account() {
                         <VpnKey />
                     </Grid>
                     <Grid item>
-                        <TextField id="input-with-icon-grid" label="New Password" type="password"
+                        <CssTextField id="input-with-icon-grid" label="New Password" type="password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </Grid>
@@ -87,7 +88,7 @@ function Account() {
                         <VpnKey />
                     </Grid>
                     <Grid item>
-                        <TextField id="input-with-icon-grid" label="Repeat Password" type="password"
+                        <CssTextField id="input-with-icon-grid" label="Repeat Password" type="password"
                             onChange={(e) => setPassword2(e.target.value)}
                         />
                     </Grid>

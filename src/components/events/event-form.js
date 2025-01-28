@@ -1,4 +1,5 @@
-import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { CssTextField } from '../layout/elements';
 
 export default function EventForm() {
 
@@ -7,6 +8,7 @@ export default function EventForm() {
     return (
         <div>
             <h1>New event for a group {group.id}</h1>
+            <CssTextField   label="Team 1"/>
         </div>
     );
 }
