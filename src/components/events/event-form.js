@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import { useLocation, useHistory } from 'react-router-dom';
 import { CssTextField } from '../layout/elements';
 import { Button } from '@material-ui/core';
+import { DateTime } from 'luxon';
+import { createEvent } from '../../services/event-services';
+import { NotificationManager } from "react-notifications";
 
 export default function EventForm() {
 
+    const { authData } = useAuth();
+    const history = useHistory();
     const { state } = useLocation();
     const { group } = state;
     const [team1, setTeam1] = useState();
@@ -14,6 +20,16 @@ export default function EventForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log('submitted', team1, team2, time);
+        const format = "yyyy-MM-dd'T'HH:mm";
+        const utcTime = DateTime.fromFormat(time, format).toUTC().toFormat(format);
+        const dataSend = { team1, team2, 'time': utcTime, 'group': group.id };
+        const eventData = await createEvent(authData.token, dataSend);
+        if (eventData) {
+            NotificationManager.success("Event created successfully");
+            history.push(`/details/${group.id}`);
+        } else {
+            NotificationManager.error("Error. Event not created");
+        }
     };
     return (
         <div>
