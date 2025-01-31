@@ -68,9 +68,12 @@ export default function Event() {
     const setScores = async () => {
         const eventData = await setResults(authData.token, { score1, score2, "event": event.id });
         if (eventData) {
+            setEvent(eventData);
             NotificationManager.success('Scores has been set');
             setScore1('');
             setScore2('');
+        }else{
+            NotificationManager.error('Scores could not be set');
         }
     }
 
@@ -102,7 +105,7 @@ export default function Event() {
                         return <div key={bet.id} className={classes.bets}>
                             <User user={bet.user} />
                             <h4>{bet.score1}:{bet.score2}</h4>
-                            <h4>PTS</h4>
+                            <h4>{bet.points}pts</h4>
                         </div>
                     })
                     }
