@@ -18,11 +18,30 @@ import { CssTextField } from '../layout/elements';
 import { setResults } from '../../services/event-services';
 
 const useStyles = makeStyles(theme => ({
+    container: {
+        textAlign: 'center',
+    },
     bets: {
         display: 'grid',
         gridTemplateColumns: '2fr 1fr 1fr',
         margin: '5px 0 0 0'
+    },
+    back: {
+        float: 'left',
+        clear: 'both'
+    },
+    accent: {
+        color: theme.palette.primary.main,
+        fontSize: '20px'
+    },
+    dateTime: {
+        color: theme.palette.secondary.main,
+        margin: '0 5px'
+    },
+    numberField: {
+        width: '120px', 
     }
+
 }));
 
 export default function Event() {
@@ -86,12 +105,12 @@ export default function Event() {
     }
 
     return (
-        <Fragment>
+        <div className={classes.container}>
 
             {event && evtTime &&
                 <div>
-                    <Link to={`/details/${event.group}`}><ChevronLeftIcon /></Link>
-                    <h3>{event.team1} VS {event.team2}</h3>
+                    <Link to={`/details/${event.group}`} className={classes.back}><ChevronLeftIcon /></Link>
+                    <h3>{event.team1} <span className={classes.accent}>VS</span> {event.team2}</h3>
                     {event.score1 >= 0 && event.score2 >= 0 &&
                         <h2>{event.score1} : {event.score2}</h2>
                     }
@@ -111,19 +130,34 @@ export default function Event() {
                     }
                     <hr />
                     <br />
-                    <CssTextField type="number" label="Score 1" onChange={e => setScore1(e.target.value)} />
-                    <CssTextField type="number" label="Score 2" onChange={e => setScore2(e.target.value)} />
-<br/>
+
                     {isFuture ?
-                        <Button variant="contained" color="primary" onClick={() => sendBet()} disabled={!score1 || !score2}>Place Bet</Button>
+                    <div>
+                        <CssTextField type="number" label="Score 1" className={classes.numberField}
+                        onChange={e => setScore1(e.target.value)} />
+                        <span className={classes.accent}>&nbsp; : &nbsp;</span>
+                        <CssTextField type="number" label="Score 2" onChange={e => setScore2(e.target.value)} />
+                        <br/><br/>  
+                        <Button variant="contained" color="primary" className={classes.numberField}
+                        onClick={() => sendBet()} disabled={!score1 || !score2}>Place Bet</Button>
+                    </div>
                         
                         :
-                        <Button variant="contained" color="primary" onClick={() => setScores()} disabled={!score1 || !score2}>Set Scores</Button>
-                        
+                        event.is_admin ?
+                        <div>
+                            <CssTextField type="number" label="Score 1" className={classes.numberField}
+                            onChange={e => setScore1(e.target.value)} />
+                            <span className={classes.accent}>&nbsp; : &nbsp;</span>
+                            <CssTextField type="number" label="Score 2" className={classes.numberField}
+                            onChange={e => setScore2(e.target.value)} />
+                            <br/><br/>  
+                            <Button variant="contained" color="primary" onClick={() => setScores()} disabled={!score1 || !score2}>Set Scores</Button>
+                        </div>
+                        : null
                     }
 
                 </div>
             }
-        </Fragment>
+        </div>
     );
 }
