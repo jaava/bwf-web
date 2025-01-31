@@ -32,6 +32,8 @@ export default function Event() {
     const [data, loading, error] = useFetchEvent(authData.token, id);
     const [event, setEvent] = useState(null);
     const [evtTime, setEvtTime] = useState(null);
+    const [isFuture, setIsFuture] = useState(null);
+    const [timeDiff, setTimeDiff] = useState(null);
     const [score1, setScore1] = useState(null);
     const [score2, setScore2] = useState(null);
 
@@ -40,8 +42,11 @@ export default function Event() {
         setEvent(data);
         if (data?.time) {
             const format = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-
-            setEvtTime(DateTime.fromFormat(data.time, format));
+            const eventTime = DateTime.fromFormat(data.time, format);
+            setEvtTime(eventTime);
+            const now = DateTime.now();
+            setIsFuture(now < eventTime);
+            setTimeDiff(eventTime.toRelative());
         }
     }, [data])
 
@@ -82,7 +87,7 @@ export default function Event() {
                     <CalendarTodayIcon className={classes.dateTime} />{evtTime.toSQLDate()}
                     <AlarmIcon className={classes.dateTime} />{evtTime.toFormat('HH:mm')}
                 </h2>
-                <hr />
+                <h2>{timeDiff}</h2>
                 <br />
                 { event && event.bets && event.bets.map(bet => {
                     return <div key={bet.id} className={classes.bets}>
@@ -94,9 +99,12 @@ export default function Event() {
                 }
                 <hr />
                 <br />
-                <CssTextField type="number" label="Score 1" onChange={e=>setScore1(e.target.value)}/>
+                {isFuture && <div>
+                    <CssTextField type="number" label="Score 1" onChange={e=>setScore1(e.target.value)}/>
                 <CssTextField type="number" label="Score 2" onChange={e=>setScore2(e.target.value)}/>
                 <Button variant="contained" color="primary" onClick={() => sendBet()} disabled={!score1 || !score2}>Place Bet</Button>
+                    </div>}
+                
             </div>
             }
         </Fragment>
