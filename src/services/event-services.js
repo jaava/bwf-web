@@ -33,6 +33,23 @@ export function placeBet(token, item){
     });
 }
 
+export function setResults(token, item){
+    return fetch(`http://127.0.0.1:8888/api/events/${item.event}/set_result/`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            },
+            body: JSON.stringify(item)
+        }
+    )
+    .then(status)
+    .catch((error) => {
+        console.error(error);
+    });
+}
+
 export function createEvent(token, data){
     return fetch(`http://127.0.0.1:8888/api/events/`,
         {
