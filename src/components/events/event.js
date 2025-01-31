@@ -7,13 +7,15 @@ import useFetchEvent from '../../hooks/fetch-event';
 import { useAuth } from '../../hooks/useAuth';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import AlarmIcon from '@material-ui/icons/Alarm';
-import TextField from '@material-ui/core/TextField';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+
 import { Button } from '@material-ui/core';
 import { DateTime } from 'luxon';
 import User from '../user/user';
 import { placeBet } from '../../services/event-services';
 import { NotificationManager } from "react-notifications";
 import Link from 'react-router-dom/Link';
+import { CssTextField } from '../layout/elements';
 
 const useStyles = makeStyles(theme => ({
     bets:{
@@ -71,7 +73,7 @@ export default function Event() {
             
             {event && evtTime && 
             <div>
-                <Link to={`/details/${event.group}`}>Back</Link>
+                <Link to={`/details/${event.group}`}><ChevronLeftIcon /></Link>
                 <h3>{event.team1} VS {event.team2}</h3>
                 {event.score1>=0 && event.score2>=0 &&
                     <h2>{event.score1} : {event.score2}</h2>
@@ -92,8 +94,8 @@ export default function Event() {
                 }
                 <hr />
                 <br />
-                <TextField type="number" label="Score 1" onChange={e=>setScore1(e.target.value)}/>
-                <TextField type="number" label="Score 2" onChange={e=>setScore2(e.target.value)}/>
+                <CssTextField type="number" label="Score 1" onChange={e=>setScore1(e.target.value)}/>
+                <CssTextField type="number" label="Score 2" onChange={e=>setScore2(e.target.value)}/>
                 <Button variant="contained" color="primary" onClick={() => sendBet()} disabled={!score1 || !score2}>Place Bet</Button>
             </div>
             }

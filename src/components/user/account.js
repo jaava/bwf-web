@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import VpnKey from "@material-ui/icons/VpnKey";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { uploadAvatar } from "../../services/user-servces";
 import { changePass } from "../../services/user-servces";
 import { NotificationManager } from "react-notifications";
@@ -51,7 +52,7 @@ function Account() {
     }
     return (
         <div>
-            <Link to={'/'}>Back</Link>
+            <Link to={'/'}><ChevronLeftIcon /></Link>
             <h1>Change Your Picture</h1>
             <form onSubmit={uploadFile}>
                 <label>

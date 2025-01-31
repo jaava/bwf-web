@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import { CssTextField } from '../layout/elements';
 import { Button } from '@material-ui/core';
 import { DateTime } from 'luxon';
 import { createEvent } from '../../services/event-services';
 import { NotificationManager } from "react-notifications";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 export default function EventForm() {
 
@@ -33,6 +34,7 @@ export default function EventForm() {
     };
     return (
         <div>
+            <Link to={'/'}><ChevronLeftIcon /></Link>
             <h1>New event for a group {group.id}</h1>
             <form onSubmit={handleSubmit}>
                 <CssTextField label="Team 1" onChange={e => setTeam1(e.target.value)} />

@@ -7,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import VpnKey from "@material-ui/icons/VpnKey";
 import Email from "@material-ui/icons/Email";
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { register } from "../../services/user-servces";
 import { auth } from "../../services/user-servces";
 
@@ -39,7 +40,7 @@ function Register() {
     }
     return (
         <div>
-            <Link to={'/'}>Back</Link>
+            <Link to={'/'}><ChevronLeftIcon/></Link>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={1} alignItems="flex-end">

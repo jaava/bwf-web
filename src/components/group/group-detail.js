@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import useFetchGroup from '../../hooks/fetch-group';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import  User from '../user/user';
 import { joinGroup, leaveGroup } from '../../services/group-serviecs';
 import { useAuth } from '../../hooks/useAuth';
@@ -74,7 +75,7 @@ function GroupDetail() {
 
     return (
         <div>
-            <Link to={'/'}>Back</Link>
+            <Link to={'/'}><ChevronLeftIcon /></Link>
             {group && <Fragment>
                 <h1>Group Detail {group.id}{group.name}: {group.location}</h1>
                 <h2>{group.description}</h2>
