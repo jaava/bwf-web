@@ -36,7 +36,7 @@ export function placeBet(token, item){
 export function setResults(token, item){
     return fetch(`http://127.0.0.1:8888/api/events/${item.event}/set_result/`,
         {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
