@@ -19,8 +19,9 @@ const useStyles = makeStyles(theme => ({
         color: theme.colors.mainAccentColor
     },
     memberContainer:{
-        display: 'flex',
-        gridTemplateColumns: '100px auto',
+        display: 'grid',
+        gridTemplateColumns: 'auto 5fr 1fr',
+        alignItems: 'center',
     }
 }));
 
@@ -99,6 +100,7 @@ function GroupDetail() {
                     
                     return <div key={member.id} className={classes.memberContainer}>
                         <User user={member.user} />
+                        <p></p>
                         <p>{member.points}pts</p>
                         </div> 
                 })}
