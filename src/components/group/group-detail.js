@@ -10,6 +10,7 @@ import { joinGroup, leaveGroup } from '../../services/group-serviecs';
 import { useAuth } from '../../hooks/useAuth';
 import Comments from '../comments/comments';
 import EventList from '../events/event-list';
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 const useStyles = makeStyles(theme => ({
     dateTime: {
@@ -22,6 +23,15 @@ const useStyles = makeStyles(theme => ({
         display: 'grid',
         gridTemplateColumns: 'auto 5fr 1fr',
         alignItems: 'center',
+    },
+    gold: {
+        color: 'gold'
+    },
+    silver: {
+        color: 'silver'
+    },
+    bronze: {
+        color: 'brown'
     }
 }));
 
@@ -38,8 +48,27 @@ function GroupDetail() {
     const history = useHistory();
 
     useEffect(() => {
-
         if(data?.members){
+            
+            data.members.sort((a, b) => b.points - a.points);
+
+            const availableTrophies = ['gold', 'silver', 'bronze'];
+            let currentTrophy = 0;
+            data.members.map((member, index) => {
+                if(index === 0){
+                    member.trophy = availableTrophies[currentTrophy];
+                }else{
+                    if(member.points !== data.members[index - 1].points){
+                        currentTrophy++;
+                    }
+                    if(currentTrophy < availableTrophies.length){
+                        member.trophy = availableTrophies[currentTrophy];
+
+                    }
+                }
+                
+            });
+
             if(authData?.user){
                 setInGroup(!!data.members.find((member) => member.user.id === authData.user.id));
                 setIsAdmin(data.members.find(member => member.user.id === authData.user.id)?.admin);
@@ -100,12 +129,13 @@ function GroupDetail() {
                     
                     return <div key={member.id} className={classes.memberContainer}>
                         <User user={member.user} />
-                        <p></p>
+                        <p><EmojiEventsIcon className={`${classes[member.trophy]}`} /></p>
                         <p>{member.points}pts</p>
                         </div> 
                 })}
 
                 <Comments group={group}/>
+
             </Fragment>}
             
         </div>
