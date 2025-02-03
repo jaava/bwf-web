@@ -119,6 +119,10 @@ export default function Event() {
                         <AlarmIcon className={classes.dateTime} />{evtTime.toFormat('HH:mm')}
                     </h2>
                     <h2>{timeDiff}</h2>
+                    {
+                        isFuture && <h3>Number of people already bet: {event.num_bets} </h3>
+                    }
+                    
                     <br />
                     {event && event.bets && event.bets.map(bet => {
                         return <div key={bet.id} className={classes.bets}>
